@@ -22,10 +22,16 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          glow: "hsl(var(--primary-glow))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+        },
+        brand: {
+          yellow: "hsl(var(--brand-yellow))",
+          black: "hsl(var(--brand-black))",
+          dark: "hsl(var(--brand-dark))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
