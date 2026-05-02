@@ -5,9 +5,15 @@ import { PublicLayout } from "@/components/layout/PublicLayout";
 import { Button } from "@/components/ui/button";
 import { VehicleCard, VehicleCardData } from "@/components/vehicles/VehicleCard";
 import { supabase } from "@/integrations/supabase/client";
-import hero from "@/assets/hero-fleet.jpg";
 
-const banks = ["BV", "Santander", "Santana Financeira", "Omni", "Banco Daycoval", "Porto Seguro"];
+const banks = [
+  { name: "Santander", logo: "/logo-santander.png" },
+  { name: "Banco Daycoval", logo: "/logo-daycoval.png" },
+  { name: "Omni", logo: "/logo-omni.png" },
+  { name: "BV", logo: "/logo-bv.png" },
+  { name: "Santana Financeira", logo: "/logo-santana.png" },
+  { name: "Porto Seguro", logo: "/logo-porto.png" }
+];
 
 const Index = () => {
   const [featured, setFeatured] = useState<VehicleCardData[]>([]);
@@ -18,36 +24,43 @@ const Index = () => {
       .from("vehicles")
       .select("id,brand,model,year,price,km,cover_image,category,featured")
       .eq("status", "ativo")
-      .order("featured", { ascending: false })
+      .eq("featured", true)
       .order("created_at", { ascending: false })
-      .limit(6)
+      .limit(8)
       .then(({ data }) => setFeatured(data || []));
   }, []);
 
   return (
     <PublicLayout>
       {/* HERO */}
-      <section className="relative">
-        <img src={hero} alt="Frota Zero Utilitários" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1024} />
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="relative container mx-auto px-4 py-24 md:py-36 text-center text-white">
-          <h1 className="font-black text-4xl md:text-6xl lg:text-7xl leading-tight">
-            COMPRE SEU UTILITÁRIO
-            <span className="block mt-2">
-              <span className="bg-primary text-primary-foreground px-4 py-1 inline-block rotate-[-1deg]">AGORA MESMO!</span>
-            </span>
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-            Vans, furgões e utilitários 0KM com as melhores condições de financiamento de São Paulo.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary-glow font-bold shadow-yellow">
-              <Link to="/veiculos">VER VEÍCULOS <ArrowRight className="ml-2 w-4 h-4" /></Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-brand-black font-bold">
-              <Link to="/financiamentos">FINANCIAMENTO</Link>
-            </Button>
+      <section className="relative min-h-[80vh] flex items-center">
+        <img src="/hero-bg.png" alt="Frota Zero Utilitários" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1024} />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-black via-brand-black/80 to-transparent" />
+        
+        <div className="relative container mx-auto px-4 py-24">
+          <div className="max-w-4xl">
+            <span className="text-primary font-bold tracking-[0.3em] text-sm uppercase mb-6 block animate-in fade-in slide-in-from-left-4 duration-700">Líder em Utilitários em São Paulo</span>
+            <h1 className="font-black text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-white animate-in fade-in slide-in-from-left-6 duration-1000">
+              O UTILITÁRIO QUE <br />
+              <span className="text-primary italic">VOCÊ PRECISA</span> <br />
+              ESTÁ AQUI.
+            </h1>
+            <p className="mt-8 text-xl md:text-2xl text-white/70 max-w-2xl leading-relaxed animate-in fade-in slide-in-from-left-8 duration-1000">
+              A maior variedade de vans, furgões e utilitários 0KM com aprovação de crédito facilitada e entrega imediata.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-4 animate-in fade-in slide-in-from-left-10 duration-1000">
+              <Button asChild size="lg" className="h-14 px-8 bg-primary text-primary-foreground hover:bg-primary-glow font-black text-lg shadow-yellow transition-all hover:scale-105">
+                <Link to="/veiculos">VER ESTOQUE COMPLETO <ArrowRight className="ml-2 w-5 h-5" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="h-14 px-8 border-2 border-white bg-transparent text-white hover:bg-white hover:text-brand-black font-bold text-lg backdrop-blur-sm transition-all">
+                <Link to="/financiamentos">SIMULAR FINANCIAMENTO</Link>
+              </Button>
+            </div>
           </div>
+        </div>
+        
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+          <div className="w-1 h-12 rounded-full bg-gradient-to-b from-primary to-transparent" />
         </div>
       </section>
 
@@ -57,10 +70,10 @@ const Index = () => {
           <h2 className="text-2xl md:text-3xl font-light italic text-white/90 mb-8">
             Confira nossos <span className="text-primary not-italic font-bold">financiamentos</span>
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 items-center">
             {banks.map((b) => (
-              <div key={b} className="text-white/70 hover:text-primary transition-smooth font-bold text-sm md:text-base text-center">
-                {b}
+              <div key={b.name} className="bg-white rounded-lg p-5 flex justify-center items-center h-32 hover:scale-105 transition-transform cursor-pointer">
+                <img src={b.logo} alt={`Logo ${b.name}`} className="max-h-20 object-contain" />
               </div>
             ))}
           </div>

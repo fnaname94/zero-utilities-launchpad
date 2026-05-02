@@ -74,11 +74,10 @@ const Usuarios = () => {
       )}
 
       <Card className="p-6 mt-6 bg-muted/40">
-        <h3 className="font-bold mb-2">Como adicionar um novo admin</h3>
-        <ol className="text-sm text-muted-foreground space-y-1 list-decimal list-inside">
-          <li>Peça para a pessoa criar uma conta em <code className="bg-background px-1 rounded">/auth</code>.</li>
-          <li>Quando o nome dela aparecer aqui, ative o switch "Admin".</li>
-        </ol>
+        <h3 className="font-bold mb-2">Como gerenciar acessos</h3>
+        <p className="text-sm text-muted-foreground">
+          Nesta tela você visualiza todas as contas cadastradas no sistema. Para liberar ou remover o acesso total de um funcionário ao painel, basta ligar ou desligar a chave "Admin" ao lado do nome dele.
+        </p>
       </Card>
     </RequireAdmin>
   );

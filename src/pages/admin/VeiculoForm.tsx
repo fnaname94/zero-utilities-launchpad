@@ -15,8 +15,25 @@ import { useAuth } from "@/hooks/useAuth";
 
 const cats = [
   { v: "van", l: "Van" }, { v: "furgao", l: "Furgão" }, { v: "caminhao", l: "Caminhão" },
-  { v: "pickup", l: "Pickup" }, { v: "escolar", l: "Escolar" }, { v: "outro", l: "Outro" },
+  { v: "pickup", l: "Pickup" }, { v: "escolar", l: "Escolar" }, { v: "passeio", l: "Carro de Passeio" }, { v: "outro", l: "Outro" },
 ];
+
+const brandModels: Record<string, string[]> = {
+  "Chevrolet": ["Montana", "S10", "Silverado"],
+  "Citroën": ["Berlingo", "Jumpy", "Jumper"],
+  "Fiat": ["Fiorino", "Strada", "Toro", "Ducato", "Scudo"],
+  "Ford": ["Courier", "Ranger", "Transit", "F-150"],
+  "Hyundai": ["HR", "H-100"],
+  "Iveco": ["Daily"],
+  "Kia": ["Bongo"],
+  "Mercedes-Benz": ["Sprinter 313", "Sprinter 314", "Sprinter 415", "Sprinter 416", "Sprinter 515", "Vito"],
+  "Mitsubishi": ["L200", "Pajero Sport"],
+  "Nissan": ["Frontier"],
+  "Peugeot": ["Partner", "Expert", "Boxer"],
+  "Renault": ["Kangoo", "Master", "Oroch"],
+  "Toyota": ["Hilux", "Bandeirante"],
+  "Volkswagen": ["Saveiro", "Amarok", "Kombi", "Delivery", "Constellation"],
+};
 
 const VeiculoForm = () => {
   const { id } = useParams();
@@ -142,10 +159,32 @@ const VeiculoForm = () => {
           <Card className="p-6 space-y-4">
             <h3 className="font-bold">Informações básicas</h3>
             <div className="grid sm:grid-cols-2 gap-4">
-              <div><Label>Marca *</Label><Input value={form.brand} onChange={(e) => upd("brand", e.target.value)} required /></div>
-              <div><Label>Modelo *</Label><Input value={form.model} onChange={(e) => upd("model", e.target.value)} required /></div>
-              <div><Label>Ano</Label><Input type="number" value={form.year} onChange={(e) => upd("year", e.target.value)} /></div>
-              <div><Label>Cor</Label><Input value={form.color} onChange={(e) => upd("color", e.target.value)} /></div>
+              <div>
+                <Label>Marca *</Label>
+                <Select value={form.brand} onValueChange={(v) => upd("brand", v)}>
+                  <SelectTrigger><SelectValue placeholder="Selecione..." /></SelectTrigger>
+                  <SelectContent>
+                    {["Chevrolet", "Citroën", "Fiat", "Ford", "Hyundai", "Iveco", "Kia", "Mercedes-Benz", "Mitsubishi", "Nissan", "Peugeot", "Renault", "Toyota", "Volkswagen", "Outra"].map((b) => <SelectItem key={b} value={b}>{b}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>Modelo *</Label>
+                <Input list="models-list" value={form.model} onChange={(e) => upd("model", e.target.value)} required placeholder={form.brand ? "Selecione ou digite..." : "Escolha a marca..."} />
+                <datalist id="models-list">
+                  {(brandModels[form.brand] || []).map(m => <option key={m} value={m} />)}
+                </datalist>
+              </div>
+              <div><Label>Ano</Label><Input type="number" value={form.year} onChange={(e) => upd("year", e.target.value)} onFocus={(e) => e.target.select()} /></div>
+              <div>
+                <Label>Cor</Label>
+                <Select value={form.color} onValueChange={(v) => upd("color", v)}>
+                  <SelectTrigger><SelectValue placeholder="Selecione..." /></SelectTrigger>
+                  <SelectContent>
+                    {["Branco", "Preto", "Prata", "Cinza", "Vermelho", "Azul", "Amarelo", "Verde", "Outra"].map(c => <SelectItem key={c} value={c}>{c}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
               <div><Label>Preço (R$)</Label><Input type="number" step="0.01" value={form.price} onChange={(e) => upd("price", e.target.value)} placeholder="Em branco = Consulte" /></div>
               <div><Label>KM</Label><Input type="number" value={form.km} onChange={(e) => upd("km", e.target.value)} /></div>
               <div>
@@ -173,8 +212,24 @@ const VeiculoForm = () => {
           <Card className="p-6 space-y-4">
             <h3 className="font-bold">Detalhes técnicos</h3>
             <div className="grid sm:grid-cols-2 gap-4">
-              <div><Label>Combustível</Label><Input value={form.fuel} onChange={(e) => upd("fuel", e.target.value)} placeholder="Diesel, Flex, Gasolina…" /></div>
-              <div><Label>Câmbio</Label><Input value={form.transmission} onChange={(e) => upd("transmission", e.target.value)} placeholder="Manual, Automático…" /></div>
+              <div>
+                <Label>Combustível</Label>
+                <Select value={form.fuel} onValueChange={(v) => upd("fuel", v)}>
+                  <SelectTrigger><SelectValue placeholder="Selecione..." /></SelectTrigger>
+                  <SelectContent>
+                    {["Diesel", "Flex", "Gasolina", "Etanol", "Elétrico", "Híbrido", "GNV"].map(f => <SelectItem key={f} value={f}>{f}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>Câmbio</Label>
+                <Select value={form.transmission} onValueChange={(v) => upd("transmission", v)}>
+                  <SelectTrigger><SelectValue placeholder="Selecione..." /></SelectTrigger>
+                  <SelectContent>
+                    {["Manual", "Automático", "Automatizado"].map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}
+                  </SelectContent>
+                </Select>
+              </div>
               <div><Label>Motor</Label><Input value={form.engine} onChange={(e) => upd("engine", e.target.value)} placeholder="2.2 16V" /></div>
               <div><Label>Lugares</Label><Input type="number" value={form.seats} onChange={(e) => upd("seats", e.target.value)} /></div>
             </div>

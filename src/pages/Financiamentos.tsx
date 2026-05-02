@@ -4,7 +4,14 @@ import { useEffect } from "react";
 
 const Financiamentos = () => {
   useEffect(() => { document.title = "Financiamentos — Zero Utilitários"; }, []);
-  const banks = ["BV", "Santander", "Santana Financeira", "Omni", "Banco Daycoval", "Porto Seguro"];
+  const banks = [
+    { name: "Santander", logo: "/logo-santander.png" },
+    { name: "Banco Daycoval", logo: "/logo-daycoval.png" },
+    { name: "Omni", logo: "/logo-omni.png" },
+    { name: "BV", logo: "/logo-bv.png" },
+    { name: "Santana Financeira", logo: "/logo-santana.png" },
+    { name: "Porto Seguro", logo: "/logo-porto.png" }
+  ];
   return (
     <PublicLayout>
       <section className="bg-brand-black text-white py-16">
@@ -19,8 +26,12 @@ const Financiamentos = () => {
       <section className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {banks.map((b) => (
-            <div key={b} className="bg-card border border-border rounded-lg p-8 text-center shadow-card font-bold text-xl">
-              {b}
+            <div key={b.name} className="bg-card border border-border rounded-lg p-8 text-center shadow-card font-bold text-xl flex items-center justify-center min-h-[120px]">
+              {b.logo ? (
+                <img src={b.logo} alt={`Logo ${b.name}`} className="max-h-12 object-contain" />
+              ) : (
+                b.name
+              )}
             </div>
           ))}
         </div>

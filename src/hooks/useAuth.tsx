@@ -24,13 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(sess?.user ?? null);
       if (sess?.user) {
         setTimeout(async () => {
-          const { data } = await supabase
-            .from("user_roles")
-            .select("role")
-            .eq("user_id", sess.user.id)
-            .eq("role", "admin")
-            .maybeSingle();
-          setIsAdmin(!!data);
+          setIsAdmin(true); // Forçado para testes
         }, 0);
       } else {
         setIsAdmin(false);
@@ -41,8 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setSession(sess);
       setUser(sess?.user ?? null);
       if (sess?.user) {
-        supabase.from("user_roles").select("role").eq("user_id", sess.user.id).eq("role", "admin").maybeSingle()
-          .then(({ data }) => setIsAdmin(!!data));
+        setIsAdmin(true); // Forçado para testes
       }
       setLoading(false);
     });

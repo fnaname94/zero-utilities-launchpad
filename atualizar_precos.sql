@@ -1,0 +1,35 @@
+﻿-- SCRIPT PARA ATUALIZAR PREÇOS E QUILOMETRAGEM
+UPDATE vehicles SET price = 109900.00 WHERE description ILIKE '%Ford Transit 2013 350L Executivo 13 Lugares Completa%';
+UPDATE vehicles SET price = 319900.00 WHERE description ILIKE '%Mercedes Sprinter 417 2023 Padrão Ligado Cadeirante 10 Lugares Extra Longa Completa%';
+UPDATE vehicles SET price = 56900.00 WHERE description ILIKE '%Mitsubishi Pajero Sport 2009 Hpe 4&#215;4 Automático Turbo Diesel Completa%';
+UPDATE vehicles SET price = 81900.00 WHERE description ILIKE '%Toyota Corolla GLi 2016 Flex 1.8 Automático Completo%';
+UPDATE vehicles SET price = 149900.00 WHERE description ILIKE '%Renault Master L1h1 2022 Furgão Curto Caminhonete Completo%';
+UPDATE vehicles SET price = 36900.00 WHERE description ILIKE '%Volkswagen Fox G2 2013 Flex 1.0 Manual Completo%';
+UPDATE vehicles SET price = 249900.00 WHERE description ILIKE '%Mercedes Sprinter 416 2022 Escolar 24 Lugares Ônibus no Documento Completa%';
+UPDATE vehicles SET price = 124900.00 WHERE description ILIKE '%Mercedes Sprinter 313 2012 Escolar 24 Lugares Ônibus no Documento Teto Baixo%';
+UPDATE vehicles SET price = 399900.00 WHERE description ILIKE '%Micro Ônibus Volkswagen Mascarello 2023 Granmicro 9-160 Escolar 46 Lugares Com Ar Condicionado%';
+UPDATE vehicles SET price = 349900.00 WHERE description ILIKE '%Mercedes Sprinter 517 Big 2024 Executiva 21 Lugares Original Completa%';
+UPDATE vehicles SET price = 359900.00 WHERE description ILIKE '%Mercedes Sprinter 517 Big 2025 Escolar 31 Lugares 0km Ônibus no Documento Com Ar Condicionado%';
+UPDATE vehicles SET price = 39900.00 WHERE description ILIKE '%Nissan Livina 2014 X-Gear 1.8 Flex Automático Completo%';
+UPDATE vehicles SET price = 244900.00 WHERE description ILIKE '%Mercedes Sprinter 416 2021 Executiva 16 Lugares Original Completa%';
+UPDATE vehicles SET price = 244900.00 WHERE description ILIKE '%Renault Master L3h2 2020 Padrão Ligado Cadeirante 10 Lugares Completa%';
+UPDATE vehicles SET price = 59900.00 WHERE description ILIKE '%Chevrolet Prisma LTZ 2017 Sedan 1.4 Flex Automático Completo%';
+UPDATE vehicles SET price = 99900.00 WHERE description ILIKE '%Fiat Ducato Minibus 2012 Escolar 16 Lugares Teto Baixo Com Ar Condicionado%';
+UPDATE vehicles SET price = 279900.00 WHERE description ILIKE '%Renault Master L3h2 2023 Padrão Ligado Cadeirante 10 Lugares Completa%';
+UPDATE vehicles SET price = 229900.00 WHERE description ILIKE '%Renault Master L3h2 2019 Padrão Ligado Convencional 16 Lugares Completa%';
+UPDATE vehicles SET price = 54900.00 WHERE description ILIKE '%Fiat Ducato Minibus 2002 Escolar 26 Lugares Ônibus no Documento Motor 2.8 Teto Baixo%';
+UPDATE vehicles SET price = 284900.00 WHERE description ILIKE '%Renault Master L3h2 2024 Executiva 16 Lugares Completa%';
+UPDATE vehicles SET price = 194900.00 WHERE description ILIKE '%Mercedes Sprinter 415 2018 Executiva 16 Lugares Teto Baixo Original Completa%';
+UPDATE vehicles SET price = 224900.00 WHERE description ILIKE '%Renault Master L3h2 2020 Escolar 24 Lugares Ônibus no Documento Com Ar Condicionado%';
+UPDATE vehicles SET price = 134900.00 WHERE description ILIKE '%IVECO CITYCLASS 70c17 2013 ESCOLAR 30 LUGARES ORIGINAL ÔNIBUS%';
+UPDATE vehicles SET price = 159900.00 WHERE description ILIKE '%Renault Master L3h2 2017 Executiva 16 Lugares Original Completa%';
+UPDATE vehicles SET price = 174900.00 WHERE description ILIKE '%Fiat Ducato Multi 2016 Escolar 28 Lugares Ônibus no Documento Teto Alto%';
+UPDATE vehicles SET price = 119900.00 WHERE description ILIKE '%Citroen Jumper 2014 Escolar 16 Lugares Original Teto Baixo%';
+UPDATE vehicles SET price = 39900.00 WHERE description ILIKE '%Jinbei Topic L 2011 Escolar 16 Lugares Gasolina e Kit Gás%';
+UPDATE vehicles SET price = 224900.00 WHERE description ILIKE '%Mercedes Sprinter 415 2019 Escolar 20 Lugares Teto Alto Com Ar Frontal%';
+UPDATE vehicles SET price = 94900.00 WHERE description ILIKE '%Ford Transit 2011 Escolar 16 Lugares Original Completa%';
+UPDATE vehicles SET price = 139900.00 WHERE description ILIKE '%Mercedes Sprinter 313 2010 Escolar 28 Lugares Ônibus no Documento Extra Longa%';
+UPDATE vehicles SET price = 359900.00 WHERE description ILIKE '%Mercedes Sprinter 417 2026 Escolar 28 Lugares Ônibus Extra Longa 0km Completa%';
+UPDATE vehicles SET price = 194900.00 WHERE description ILIKE '%Mercedes Sprinter 415 2018 Escolar 16 Lugares Original Completa%';
+UPDATE vehicles SET price = 324900.00 WHERE description ILIKE '%Mercedes Sprinter 417 2026 Escolar 24 Lugares 0km Ônibus no Documento Com Ar Frontal%';
+

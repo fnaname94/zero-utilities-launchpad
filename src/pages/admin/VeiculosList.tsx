@@ -7,6 +7,17 @@ import { Card } from "@/components/ui/card";
 import { Plus, Pencil, Trash2, Star } from "lucide-react";
 import { toast } from "sonner";
 import { formatPrice, categoryLabel } from "@/lib/format";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const VeiculosList = () => {
   const [list, setList] = useState<any[]>([]);
@@ -14,15 +25,28 @@ const VeiculosList = () => {
 
   const load = async () => {
     setLoading(true);
-    const { data } = await supabase.from("vehicles").select("*").order("created_at", { ascending: false });
-    setList(data || []); setLoading(false);
+    try {
+      const { data, error } = await supabase.from("vehicles").select("*").order("created_at", { ascending: false });
+      if (error) throw error;
+      setList(data || []);
+    } catch (error: any) {
+      toast.error("Erro ao carregar veículos: " + error.message);
+    } finally {
+      setLoading(false);
+    }
   };
-  useEffect(() => { document.title = "Veículos — Admin"; load(); }, []);
+
+  useEffect(() => {
+    document.title = "Veículos — Admin";
+    load();
+  }, []);
 
   const remove = async (id: string) => {
-    if (!confirm("Excluir este veículo? As fotos também serão removidas.")) return;
     const { error } = await supabase.from("vehicles").delete().eq("id", id);
-    if (error) { toast.error(error.message); return; }
+    if (error) {
+      toast.error("Erro ao excluir: " + error.message);
+      return;
+    }
     toast.success("Veículo removido");
     load();
   };
@@ -35,7 +59,9 @@ const VeiculosList = () => {
           <p className="text-muted-foreground">{list.length} cadastrados</p>
         </div>
         <Button asChild className="bg-primary text-primary-foreground hover:bg-primary-glow font-bold">
-          <Link to="/admin/veiculos/novo"><Plus className="w-4 h-4 mr-2" /> Novo veículo</Link>
+          <Link to="/admin/veiculos/novo">
+            <Plus className="w-4 h-4 mr-2" /> Novo veículo
+          </Link>
         </Button>
       </div>
 
@@ -43,7 +69,11 @@ const VeiculosList = () => {
         <div className="text-muted-foreground">Carregando…</div>
       ) : list.length === 0 ? (
         <Card className="p-12 text-center text-muted-foreground">
-          Nenhum veículo ainda. <Link to="/admin/veiculos/novo" className="text-primary underline">Cadastrar o primeiro</Link>.
+          Nenhum veículo ainda.{" "}
+          <Link to="/admin/veiculos/novo" className="text-primary underline">
+            Cadastrar o primeiro
+          </Link>
+          .
         </Card>
       ) : (
         <Card className="overflow-x-auto">
@@ -63,7 +93,9 @@ const VeiculosList = () => {
                 <tr key={v.id} className="border-t border-border">
                   <td className="p-3">
                     <div className="w-16 h-12 bg-muted rounded overflow-hidden">
-                      {v.cover_image && <img src={v.cover_image} alt="" className="w-full h-full object-cover" />}
+                      {v.cover_image && (
+                        <img src={v.cover_image} alt="" className="w-full h-full object-cover" />
+                      )}
                     </div>
                   </td>
                   <td className="p-3">
@@ -76,14 +108,49 @@ const VeiculosList = () => {
                   <td className="p-3">{categoryLabel(v.category)}</td>
                   <td className="p-3 font-semibold">{formatPrice(v.price)}</td>
                   <td className="p-3">
-                    <span className={`text-xs px-2 py-1 rounded font-bold ${
-                      v.status === "ativo" ? "bg-green-100 text-green-800" :
-                      v.status === "vendido" ? "bg-red-100 text-red-800" : "bg-gray-100 text-gray-800"
-                    }`}>{v.status}</span>
+                    <span
+                      className={`text-xs px-2 py-1 rounded font-bold ${
+                        v.status === "ativo"
+                          ? "bg-green-100 text-green-800"
+                          : v.status === "vendido"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-gray-100 text-gray-800"
+                      }`}
+                    >
+                      {v.status}
+                    </span>
                   </td>
                   <td className="p-3 text-right whitespace-nowrap">
-                    <Button asChild variant="ghost" size="sm"><Link to={`/admin/veiculos/${v.id}`}><Pencil className="w-4 h-4" /></Link></Button>
-                    <Button variant="ghost" size="sm" onClick={() => remove(v.id)}><Trash2 className="w-4 h-4 text-destructive" /></Button>
+                    <Button asChild variant="ghost" size="sm">
+                      <Link to={`/admin/veiculos/${v.id}`}>
+                        <Pencil className="w-4 h-4" />
+                      </Link>
+                    </Button>
+
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="ghost" size="sm">
+                          <Trash2 className="w-4 h-4 text-destructive" />
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Excluir veículo?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Esta ação não pode ser desfeita. O veículo e suas referências serão removidos permanentemente.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                          <AlertDialogAction
+                            onClick={() => remove(v.id)}
+                            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                          >
+                            Excluir
+                          </AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
                   </td>
                 </tr>
               ))}
@@ -95,3 +162,4 @@ const VeiculosList = () => {
   );
 };
 export default VeiculosList;
+
