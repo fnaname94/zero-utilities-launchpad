@@ -31,17 +31,27 @@ const Veiculos = () => {
       .order("created_at", { ascending: false });
     
     if (cat !== "all" && type !== "passeio") qb = qb.eq("category", cat as any);
-    if (type === "0km") qb = qb.gte("year", 2025).neq("category", "passeio");
-    if (type === "semi") qb = qb.lt("year", 2025).neq("category", "passeio");
+    if (type === "0km") qb = qb.eq("km", 0).neq("category", "passeio");
+    if (type === "semi") qb = qb.gt("km", 0).neq("category", "passeio");
     if (type === "passeio") qb = qb.eq("category", "passeio");
 
-    qb.then(({ data }) => {
+    qb.then(({ data, error }) => {
+      if (error) {
+        console.error("Erro ao carregar veículos:", error);
+        setList([]);
+        setLoading(false);
+        return;
+      }
       let r = data || [];
       if (q) {
         const s = q.toLowerCase();
         r = r.filter((v) => `${v.brand} ${v.model}`.toLowerCase().includes(s));
       }
       setList(r);
+      setLoading(false);
+    }).catch((err) => {
+      console.error("Exceção ao carregar veículos:", err);
+      setList([]);
       setLoading(false);
     });
   }, [cat, q, type]);
