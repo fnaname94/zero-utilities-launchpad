@@ -9,7 +9,7 @@ const Financiamentos = () => {
     { name: "Banco Daycoval", logo: "/logo-daycoval.png" },
     { name: "Omni", logo: "/logo-omni.png" },
     { name: "BV", logo: "/logo-bv.png" },
-    { name: "Santana Financeira", logo: "/logo-santana.png" },
+    { name: "Sicoob", logo: "/logo-sicoob.png" },
     { name: "Porto Seguro", logo: "/logo-porto.png" }
   ];
   return (
