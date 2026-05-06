@@ -46,7 +46,7 @@ const Index = () => {
               ESTÁ AQUI.
             </h1>
             <p className="mt-8 text-xl md:text-2xl text-white/70 max-w-2xl leading-relaxed animate-in fade-in slide-in-from-left-8 duration-1000">
-              A maior variedade de vans, furgões e utilitários 0KM com aprovação de crédito facilitada e entrega imediata.
+              Seu próximo utilitário está aqui — vans escolares, executivas e furgões com qualidade, garantia e ótimo custo-benefício.
             </p>
             <div className="mt-10 flex flex-wrap gap-4 animate-in fade-in slide-in-from-left-10 duration-1000">
               <Button asChild size="lg" className="h-14 px-8 bg-primary text-primary-foreground hover:bg-primary-glow font-black text-lg shadow-yellow transition-all hover:scale-105">
