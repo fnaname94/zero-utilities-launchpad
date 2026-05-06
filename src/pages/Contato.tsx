@@ -18,7 +18,7 @@ const Contato = () => {
             { icon: MapPin, t: "Endereço", d: "R. Matias Ferrão, 26 — Vila Maria, São Paulo/SP" },
             { icon: Phone, t: "Telefone", d: "(11) 2636-1000", href: "tel:+551126361000" },
             { icon: MessageCircle, t: "WhatsApp", d: "(11) 99986-2636", href: "https://api.whatsapp.com/send?phone=5511999862636&text=Olá!" },
-            { icon: Mail, t: "Email", d: "contato@zeroutilitarios.com.br", href: "mailto:contato@zeroutilitarios.com.br" },
+            { icon: Mail, t: "Email", d: "zero.utilitarios@gmail.com", href: "mailto:zero.utilitarios@gmail.com" },
           ].map((i) => (
             <a key={i.t} href={i.href || "#"} target={i.href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="flex items-start gap-4 group">
               <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shrink-0">

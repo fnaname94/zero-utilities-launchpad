@@ -16,7 +16,7 @@ export const Footer = () => (
           <li className="flex items-start gap-3"><MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" /> R. Matias Ferrão, 26 — Vila Maria, São Paulo</li>
           <li className="flex items-center gap-3"><Phone className="w-4 h-4 text-primary" /> (11) 2636-1000</li>
           <li className="flex items-center gap-3"><MessageCircle className="w-4 h-4 text-primary" /> WhatsApp: (11) 99986-2636</li>
-          <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-primary" /> contato@zeroutilitarios.com.br</li>
+          <li className="flex items-center gap-3"><Mail className="w-4 h-4 text-primary" /> zero.utilitarios@gmail.com</li>
         </ul>
       </div>
       <div>
