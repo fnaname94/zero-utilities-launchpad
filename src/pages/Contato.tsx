@@ -1,6 +1,6 @@
 import { PublicLayout } from "@/components/layout/PublicLayout";
 import { useEffect } from "react";
-import { MapPin, Phone, MessageCircle, Mail } from "lucide-react";
+import { MapPin, Phone, MessageCircle, Mail, Clock } from "lucide-react";
 
 const Contato = () => {
   useEffect(() => { document.title = "Contato — Zero Utilitários"; }, []);
@@ -19,17 +19,37 @@ const Contato = () => {
             { icon: Phone, t: "Telefone", d: "(11) 2636-1000", href: "tel:+551126361000" },
             { icon: MessageCircle, t: "WhatsApp", d: "(11) 99986-2636", href: "https://api.whatsapp.com/send?phone=5511999862636&text=Olá!" },
             { icon: Mail, t: "Email", d: "zero.utilitarios@gmail.com", href: "mailto:zero.utilitarios@gmail.com" },
-          ].map((i) => (
-            <a key={i.t} href={i.href || "#"} target={i.href?.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" className="flex items-start gap-4 group">
-              <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shrink-0">
-                <i.icon className="w-6 h-6 text-primary-foreground" />
+            {
+              icon: Clock,
+              t: "Horário de Atendimento",
+              d: "Segunda a quinta: 08:00 às 17:00 | Sexta: 08:00 às 16:00 | Sábado: 08:00 às 13:00",
+            },
+          ].map((i) => {
+            const content = (
+              <div className="flex items-start gap-4 group">
+                <div className="w-12 h-12 rounded-lg bg-primary flex items-center justify-center shrink-0">
+                  <i.icon className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <h3 className="font-bold">{i.t}</h3>
+                  <p className="text-muted-foreground group-hover:text-foreground transition-smooth whitespace-pre-line">{i.d}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-bold">{i.t}</h3>
-                <p className="text-muted-foreground group-hover:text-foreground transition-smooth">{i.d}</p>
-              </div>
-            </a>
-          ))}
+            );
+
+            return i.href ? (
+              <a
+                key={i.t}
+                href={i.href}
+                target={i.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+              >
+                {content}
+              </a>
+            ) : (
+              <div key={i.t}>{content}</div>
+            );
+          })}
         </div>
         <div className="rounded-lg overflow-hidden shadow-card aspect-square md:aspect-auto bg-muted">
           <iframe

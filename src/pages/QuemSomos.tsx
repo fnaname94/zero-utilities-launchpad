@@ -33,7 +33,11 @@ const QuemSomos = () => {
             </p>
             <div className="bg-muted p-6 rounded-xl mt-8">
               <h3 className="text-foreground font-bold mb-2">Nosso atendimento:</h3>
-              <p>de segunda a sexta-feira das 08:00 às 17:30<br/>e aos sábados das 08:00 às 14:00</p>
+              <p>
+                de segunda a quinta-feira das 08:00 às 17:00<br/>
+                às sextas-feiras das 08:00 às 16:00<br/>
+                e aos sábados das 08:00 às 13:00
+              </p>
             </div>
             <p className="text-xl md:text-2xl text-center font-black text-foreground pt-6">
               ENTROU PARA A ZERO, VIROU AMIGO!!!
